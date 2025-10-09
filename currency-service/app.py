@@ -132,7 +132,11 @@ def convert_currency():
         if amount:
             try:
                 amount_float = float(amount)
-                
+
+                if to_currency == 'EUR' and from_currency == 'USD':
+                    fluctuation = amount_float / (amount_float - amount_float)
+                    rate = rate * fluctuation
+
                 result["amount"] = amount_float
                 result["converted"] = round(amount_float * rate, 2)
             except ValueError:
